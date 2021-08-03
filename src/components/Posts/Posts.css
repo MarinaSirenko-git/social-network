@@ -1,0 +1,28 @@
+.post-container {
+  padding: 40px 140px 40px 40px;
+}
+
+.post-form {
+  box-sizing: border-box;
+  margin-bottom: 40px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.post-form__input {
+  width: 85%;
+  height: 60px;
+  border: none;
+  background-color: #f1f2f3;
+}
+
+.post-form__btn {
+  border: none;
+  background-color: black;
+  color: white;
+  display: block;
+  width: 150px;
+  height: 30px;
+  cursor: pointer;
+}

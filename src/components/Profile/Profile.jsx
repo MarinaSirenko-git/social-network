@@ -1,12 +1,14 @@
 import React from 'react';
+import Poster from './../Poster/Poster.jsx';
+import Posts from '../Posts/Posts.jsx';
 import './Profile.css';
 
 function Profile() {
   return(
     <>
-      <div>Постер</div>
+      <Poster />
       <div>Ава + описание</div>
-      <div>Посты</div>
+      <Posts />
     </>
   )
 }

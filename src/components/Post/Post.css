@@ -1,0 +1,29 @@
+.post {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #dce1e6;
+}
+
+.post__user-avatar {
+  width: 60px;
+  min-width: 60px;
+  height: 60px;
+  overflow: hidden;
+  border-radius: 50%;
+  box-sizing: border-box;
+  display: flex;
+}
+
+.post__user-img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+}
+
+.post__text {
+  margin: 0;
+  padding: 0;
+}
