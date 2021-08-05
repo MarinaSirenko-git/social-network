@@ -4,12 +4,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App/App.jsx';
 import { addPost } from './redux/state.js';
+import { changeNewPostText } from './redux/state.js';
 
 export const rerenderEntireTree = (state) => {
   ReactDOM.render(
     <React.StrictMode>
       <Router>
-        <App dialogs={state.chatPage.dialogs} messages={state.chatPage.messages} posts={state.profilePage.posts} addPost={addPost}/>
+        <App state={state} addPost={addPost} changeNewPostText={changeNewPostText}/>
       </Router>
     </React.StrictMode>,
     document.getElementById('root')

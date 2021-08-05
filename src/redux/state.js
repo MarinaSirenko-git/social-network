@@ -23,15 +23,22 @@ export const state = {
   },
   profilePage : {
     posts,
+    newPostText: '',
   }  
 }
 
-export const addPost = (postMessage) => {
+export const addPost = () => {
   const newPost = {
-    id: 2,
+    id: Math.random(),
     userPhotoPath: 'https://upload.wikimedia.org/wikipedia/commons/e/eb/Paul_Thomas_Anderson_2007_crop.jpg',
-    text: postMessage,
+    text: state.profilePage.newPostText,
   }
   state.profilePage.posts.push(newPost);
+  state.profilePage.newPostText = '';
+  rerenderEntireTree(state);
+}
+
+export const changeNewPostText = (newText) => {
+  state.profilePage.newPostText = newText;
   rerenderEntireTree(state);
 }
