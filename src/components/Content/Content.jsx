@@ -4,11 +4,15 @@ import Profile from '../Profile/Profile.jsx';
 import Dialogs from '../Dialogs/Dialogs.jsx';
 import './Content.css';
 
-function Content() {
+function Content({dialogs, messages, posts}) {
   return (
     <main className="content">
-      <Route path="/profile" component={Profile} />
-      <Route path="/dialogs" component={Dialogs} />
+      <Route path="/profile">
+        <Profile posts={posts} />
+      </Route>
+      <Route path="/dialogs">
+        <Dialogs dialogs={dialogs} messages={messages} />
+      </Route>
     </main>
   )
 }

@@ -1,0 +1,35 @@
+.contact__link {
+  display: grid;
+  grid-template-columns: minmax(min-content, max-content) 1fr;
+  grid-template-rows: 1fr 1fr;
+  align-items: end;
+  margin-bottom: 20px;
+  text-decoration: none;
+  transition: all 0.5s ease;
+}
+
+.contact__link_active {
+  background-color: #191919;
+  padding: 5px 0;
+}
+
+.contact__photo {
+  display: flex;
+  object-fit: cover;
+  width: 45px;
+  height: 45px;
+  border: 2px solid white;
+  border-radius: 50%;
+  grid-row: 1/3;
+  margin-right: 15px;
+}
+
+.contact__name {
+  color: white;
+}
+
+.contact__status {
+  color: white;
+  opacity: 0.5;
+  align-self: baseline;
+}

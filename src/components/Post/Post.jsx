@@ -1,13 +1,13 @@
 import React from 'react';
 import './Post.css'
 
-function Post() {
+function Post({ userPhotoPath, text }) {
   return(
     <div className="post">
       <div className="post__user-avatar">
-        <img className="post__user-img" src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Paul_Thomas_Anderson_2007_crop.jpg" alt="фото" />
+        <img className="post__user-img" src={userPhotoPath} alt="мой аватар" />
       </div>
-      <p className="post__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit atque odio esse ea? Iste voluptatibus odit reiciendis? Quos, ratione aperiam. Atque, quis. Deserunt cupiditate explicabo accusantium repudiandae architecto odit optio.</p>
+      <p className="post__text">{text}</p>
     </div>
   )
 }

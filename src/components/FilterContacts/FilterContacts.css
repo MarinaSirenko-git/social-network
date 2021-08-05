@@ -1,0 +1,14 @@
+.filter-contacts {
+  width: 100%;
+  border: none;
+  background-color: black;
+  height: 50px;
+  display: block;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 20px;
+  padding-left: 5px;
+}
+
+.filter-contacts::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}

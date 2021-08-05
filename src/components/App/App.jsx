@@ -4,12 +4,13 @@ import SideBar from '../SideBar/SideBar.jsx';
 import Content from '../Content/Content.jsx'
 import './App.css';
 
-function App() {
+function App({ dialogs, messages, posts }) {
+
   return (
     <div className="App">
       <Header />
       <SideBar />
-      <Content />
+      <Content dialogs={dialogs} messages={messages} posts={posts} />
     </div>
   );
 }

@@ -1,0 +1,22 @@
+.dialogs {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 1fr;
+  min-height: calc(100vh - 48px - 20px);
+}
+
+.dialogs__contacts {
+  background-color: #000000eb;
+  padding: 20px;
+}
+
+.dialogs__messages {
+  padding: 20px;
+}
+
+.dialogs__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
