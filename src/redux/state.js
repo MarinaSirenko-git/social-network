@@ -1,5 +1,3 @@
-import { rerenderEntireTree } from './../render.js';
-
 const dialogs = [
   {id: 1, name: 'Pavel Durov', status: 'online', photoPath: 'https://secretmag.ru/thumb/1800x0/filters:quality(75):no_upscale()/imgs/2021/04/24/10/4631947/db4ace683955496f18d36e8d682c6805e2d87278.jpg' },
   {id: 2, name: 'Ivan Petrov', status: 'offline', photoPath: 'https://secretmag.ru/thumb/1800x0/filters:quality(75):no_upscale()/imgs/2021/04/24/10/4631947/db4ace683955496f18d36e8d682c6805e2d87278.jpg' },
@@ -16,29 +14,38 @@ const posts = [
   {id: 1, userPhotoPath: 'https://upload.wikimedia.org/wikipedia/commons/e/eb/Paul_Thomas_Anderson_2007_crop.jpg', text: 'text text'}
 ]
 
-export const state = {
-  chatPage: {
-    dialogs,
-    messages,
+export const store = {
+  _state: {
+    chatPage: {
+      dialogs,
+      messages,
+    },
+    profilePage : {
+      posts,
+      newPostText: '',
+    }  
   },
-  profilePage : {
-    posts,
-    newPostText: '',
-  }  
-}
-
-export const addPost = () => {
-  const newPost = {
-    id: Math.random(),
-    userPhotoPath: 'https://upload.wikimedia.org/wikipedia/commons/e/eb/Paul_Thomas_Anderson_2007_crop.jpg',
-    text: state.profilePage.newPostText,
+  getState() {
+    return this._state;
+  },
+  _callSubscriber(state) {
+    console.log(state)
+  },
+  addPost() {
+    const newPost = {
+      id: Math.random(),
+      userPhotoPath: 'https://upload.wikimedia.org/wikipedia/commons/e/eb/Paul_Thomas_Anderson_2007_crop.jpg',
+      text: this._state.profilePage.newPostText,
+    }
+    this._state.profilePage.posts.push(newPost);
+    this._state.profilePage.newPostText = '';
+    this._callSubscriber(this._state);
+  },
+  changeNewPostText(newText) {
+    this._state.profilePage.newPostText = newText;
+    this._callSubscriber(this._state);
+  },
+  subscribe(observer) {
+    this._callSubscriber = observer;
   }
-  state.profilePage.posts.push(newPost);
-  state.profilePage.newPostText = '';
-  rerenderEntireTree(state);
-}
-
-export const changeNewPostText = (newText) => {
-  state.profilePage.newPostText = newText;
-  rerenderEntireTree(state);
 }
