@@ -19,6 +19,7 @@ export const store = {
     chatPage: {
       dialogs,
       messages,
+      userMessageBody: '',
     },
     profilePage : {
       posts,
@@ -31,21 +32,62 @@ export const store = {
   _callSubscriber(state) {
     console.log(state)
   },
-  addPost() {
-    const newPost = {
-      id: Math.random(),
-      userPhotoPath: 'https://upload.wikimedia.org/wikipedia/commons/e/eb/Paul_Thomas_Anderson_2007_crop.jpg',
-      text: this._state.profilePage.newPostText,
-    }
-    this._state.profilePage.posts.push(newPost);
-    this._state.profilePage.newPostText = '';
-    this._callSubscriber(this._state);
-  },
-  changeNewPostText(newText) {
-    this._state.profilePage.newPostText = newText;
-    this._callSubscriber(this._state);
-  },
   subscribe(observer) {
     this._callSubscriber = observer;
+  },
+  dispatch(action){
+    if(action.type === 'ADD-POST') {
+      const newPost = {
+        id: Math.random(),
+        userPhotoPath: 'https://upload.wikimedia.org/wikipedia/commons/e/eb/Paul_Thomas_Anderson_2007_crop.jpg',
+        text: this._state.profilePage.newPostText,
+      }
+      this._state.profilePage.posts.push(newPost);
+      this._state.profilePage.newPostText = '';
+      this._callSubscriber(this._state);
+    } else if(action.type === 'CHANGE-POST-TEXT') {
+      this._state.profilePage.newPostText = action.newText;
+      this._callSubscriber(this._state);
+    } else if(action.type === 'CHANGE-USER-MESSAGE-TEXT') {
+      this._state.chatPage.userMessageBody = action.message;
+      this._callSubscriber(this._state);
+    } else if(action.type === 'ADD-MESSAGE') {
+      const newMessage = {
+        id: Math.random(),
+        time: '22:00', 
+        date: Date(), 
+        owner: 'User', 
+        text: this._state.chatPage.userMessageBody,
+      }
+      this._state.chatPage.messages.push(newMessage);
+      this._state.chatPage.userMessageBody = '';
+      this._callSubscriber(this._state);
+    }
+  },
+}
+
+export const postsActionCreator = () => {
+  return {
+    type: 'ADD-POST',
+  }
+}
+
+export const changePostActionCreator = (text) => {
+  return {
+    type: 'CHANGE-POST-TEXT',
+    newText: text
+  }
+}
+
+export const changeMessageActionCreator = (text) => {
+  return {
+    type: 'CHANGE-USER-MESSAGE-TEXT',
+    message: text
+  }
+}
+
+export const addMessageActionCreator = () => {
+  return {
+    type: 'ADD-MESSAGE',
   }
 }

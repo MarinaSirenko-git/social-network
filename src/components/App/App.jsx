@@ -4,7 +4,7 @@ import SideBar from '../SideBar/SideBar.jsx';
 import Content from '../Content/Content.jsx'
 import './App.css';
 
-function App({ state, addPost, changeNewPostText }) {
+function App({ state, dispatch }) {
 
   return (
     <div className="App">
@@ -14,9 +14,9 @@ function App({ state, addPost, changeNewPostText }) {
         dialogs={state.chatPage.dialogs} 
         messages={state.chatPage.messages} 
         posts={state.profilePage.posts} 
-        newPostText={state.profilePage.newPostText} 
-        addPost={addPost}
-        changeNewPostText={changeNewPostText} />
+        newPostText={state.profilePage.newPostText}
+        userMessageBody={state.chatPage.userMessageBody}
+        dispatch={dispatch}/>
     </div>
   );
 }

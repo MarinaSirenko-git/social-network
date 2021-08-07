@@ -4,14 +4,14 @@ import Profile from '../Profile/Profile.jsx';
 import Dialogs from '../Dialogs/Dialogs.jsx';
 import './Content.css';
 
-function Content({ dialogs, messages, posts, newPostText, addPost, changeNewPostText }) {
+function Content({ dialogs, messages, posts, newPostText, userMessageBody, dispatch }) {
   return (
     <main className="content">
       <Route path="/profile">
-        <Profile posts={posts} addPost={addPost} newPostText={newPostText} changeNewPostText={changeNewPostText}/>
+        <Profile posts={posts} dispatch={dispatch} newPostText={newPostText} />
       </Route>
       <Route path="/dialogs">
-        <Dialogs dialogs={dialogs} messages={messages} />
+        <Dialogs dialogs={dialogs} messages={messages} userMessageBody={userMessageBody} dispatch={dispatch} />
       </Route>
     </main>
   )

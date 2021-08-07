@@ -4,12 +4,12 @@ import Posts from '../Posts/Posts.jsx';
 import AboutUser from '../AboutUser/AboutUser.jsx';
 import './Profile.css';
 
-function Profile({ posts, addPost, newPostText, changeNewPostText }) {
+function Profile({ posts, dispatch, newPostText }) {
   return(
     <section className="profile">
       <Poster />
       <AboutUser />
-      <Posts posts={posts} addPost={addPost} newPostText={newPostText} changeNewPostText={changeNewPostText}/>
+      <Posts posts={posts} newPostText={newPostText} dispatch={dispatch} />
     </section>
   )
 }

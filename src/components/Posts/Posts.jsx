@@ -1,18 +1,19 @@
 import React from 'react';
 import Post from '../Post/Post.jsx';
+import { changePostActionCreator, postsActionCreator } from '../../redux/state.js';
 import './Posts.css';
 
-function Posts({ posts, newPostText, addPost, changeNewPostText }) {
+function Posts({ posts, newPostText, dispatch }) {
   const textariaElement = React.createRef();
 
   const handleTextariaChange = () => {
     const text = textariaElement.current.value;
-    changeNewPostText(text)
+    dispatch(changePostActionCreator(text))
   }
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    addPost();
+    dispatch(postsActionCreator())
   }
 
   return(

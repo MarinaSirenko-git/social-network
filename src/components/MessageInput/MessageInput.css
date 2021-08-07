@@ -1,0 +1,16 @@
+.message-input__text {
+  width: 85%;
+  height: 60px;
+  border: none;
+  background-color: #f1f2f3;
+}
+
+.message-input__button {
+  border: none;
+  background-color: black;
+  color: white;
+  display: block;
+  width: 120px;
+  height: 30px;
+  cursor: pointer;
+}
