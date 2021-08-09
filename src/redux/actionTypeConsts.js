@@ -1,0 +1,4 @@
+export const CHANGE_USER_MESSAGE_TEXT = 'CHANGE-USER-MESSAGE-TEXT';
+export const ADD_MESSAGE = 'ADD-MESSAGE';
+export const CHANGE_POST_TEXT = 'CHANGE-POST-TEXT';
+export const ADD_POST = 'ADD-POST';
