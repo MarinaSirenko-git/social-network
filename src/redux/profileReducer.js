@@ -1,4 +1,4 @@
-const profileReducer = (state, action) => {
+export const profileReducer = (state, action) => {
   switch (action.type) {
     case 'ADD-POST':
       const newPost = {
@@ -17,5 +17,18 @@ const profileReducer = (state, action) => {
   }
 }
 
-export default profileReducer;
+export const postsActionCreator = () => {
+  return {
+    type: 'ADD-POST',
+  }
+}
+
+
+export const changePostActionCreator = (text) => {
+  return {
+    type: 'CHANGE-POST-TEXT',
+    newText: text
+  }
+}
+
 

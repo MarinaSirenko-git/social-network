@@ -1,4 +1,4 @@
-const dialogsReducer = (state, action) => {
+export const dialogsReducer = (state, action) => {
   switch (action.type) {
     case 'CHANGE-USER-MESSAGE-TEXT':
       state.userMessageBody = action.message;
@@ -19,4 +19,16 @@ const dialogsReducer = (state, action) => {
   }
 }
 
-export default dialogsReducer;
+
+export const changeMessageActionCreator = (text) => {
+  return {
+    type: 'CHANGE-USER-MESSAGE-TEXT',
+    message: text
+  }
+}
+
+export const addMessageActionCreator = () => {
+  return {
+    type: 'ADD-MESSAGE',
+  }
+}

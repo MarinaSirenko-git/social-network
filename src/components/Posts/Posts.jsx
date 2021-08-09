@@ -1,6 +1,6 @@
 import React from 'react';
 import Post from '../Post/Post.jsx';
-import { changePostActionCreator, postsActionCreator } from '../../redux/state.js';
+import { changePostActionCreator, postsActionCreator } from '../../redux/profileReducer.js';
 import './Posts.css';
 
 function Posts({ posts, newPostText, dispatch }) {

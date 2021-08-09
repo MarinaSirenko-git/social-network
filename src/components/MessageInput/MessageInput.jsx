@@ -1,5 +1,5 @@
 import React from 'react';
-import {changeMessageActionCreator, addMessageActionCreator} from '../../redux/state.js';
+import {changeMessageActionCreator, addMessageActionCreator} from '../../redux/dialogsReducer.js';
 import './MessageInput.css';
 
 function MessageInput({dispatch, userMessageBody}){

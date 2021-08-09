@@ -1,5 +1,5 @@
-import profileReducer from "./profileReducer";
-import dialogsReducer from "./dialogsReducer";
+import { profileReducer } from "./profileReducer";
+import { dialogsReducer } from "./dialogsReducer";
 
 const dialogs = [
   {id: 1, name: 'Pavel Durov', status: 'online', photoPath: 'https://secretmag.ru/thumb/1800x0/filters:quality(75):no_upscale()/imgs/2021/04/24/10/4631947/db4ace683955496f18d36e8d682c6805e2d87278.jpg' },
@@ -45,28 +45,3 @@ export const store = {
   },
 }
 
-export const postsActionCreator = () => {
-  return {
-    type: 'ADD-POST',
-  }
-}
-
-export const changePostActionCreator = (text) => {
-  return {
-    type: 'CHANGE-POST-TEXT',
-    newText: text
-  }
-}
-
-export const changeMessageActionCreator = (text) => {
-  return {
-    type: 'CHANGE-USER-MESSAGE-TEXT',
-    message: text
-  }
-}
-
-export const addMessageActionCreator = () => {
-  return {
-    type: 'ADD-MESSAGE',
-  }
-}
