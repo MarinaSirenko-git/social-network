@@ -1,17 +1,17 @@
 import React from 'react';
 import { Route } from "react-router-dom";
 import Profile from '../Profile/Profile.jsx';
-import Dialogs from '../Dialogs/Dialogs.jsx';
+import DialogsContainer from '../../containers/DialogsContainer.jsx';
 import './Content.css';
 
-function Content({ dialogs, messages, posts, newPostText, userMessageBody, dispatch }) {
+function Content({ store }) {
   return (
     <main className="content">
       <Route path="/profile">
-        <Profile posts={posts} dispatch={dispatch} newPostText={newPostText} />
+        <Profile store={store} />
       </Route>
       <Route path="/dialogs">
-        <Dialogs dialogs={dialogs} messages={messages} userMessageBody={userMessageBody} dispatch={dispatch} />
+        <DialogsContainer store={store} />
       </Route>
     </main>
   )

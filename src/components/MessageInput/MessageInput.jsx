@@ -1,19 +1,19 @@
 import React from 'react';
-import {changeMessageActionCreator, addMessageActionCreator} from '../../redux/dialogsReducer.js';
 import './MessageInput.css';
 
-function MessageInput({dispatch, userMessageBody}){
-  const handleChange = (e) => {
-    dispatch(changeMessageActionCreator(e.target.value));
-    
+function MessageInput({userMessageBody, changeChar, sendMessage }) {
+
+  const handleTextareaChange = (e) => {
+    changeChar(e.target.value)
   }
+
   const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(addMessageActionCreator());
+    sendMessage(e);
   }
+
   return(
     <form className="message-input" onSubmit={handleSubmit}>
-      <textarea className="message-input__text" placeholder="Введите сообщение" onChange={handleChange} value={userMessageBody} />
+      <textarea className="message-input__text" placeholder="Введите сообщение" onChange={handleTextareaChange} value={userMessageBody} />
       <button className="message-input__button">Отправить</button>
     </form>
   )

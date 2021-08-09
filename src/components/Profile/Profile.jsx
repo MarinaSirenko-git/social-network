@@ -1,15 +1,15 @@
 import React from 'react';
 import Poster from './../Poster/Poster.jsx';
-import Posts from '../Posts/Posts.jsx';
+import PostsContainer from '../../containers/PostsContainer.jsx';
 import AboutUser from '../AboutUser/AboutUser.jsx';
 import './Profile.css';
 
-function Profile({ posts, dispatch, newPostText }) {
+function Profile({ store }) {
   return(
     <section className="profile">
       <Poster />
       <AboutUser />
-      <Posts posts={posts} newPostText={newPostText} dispatch={dispatch} />
+      <PostsContainer store={store} />
     </section>
   )
 }

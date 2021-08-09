@@ -5,11 +5,11 @@ import './index.css';
 import App from './components/App/App.jsx';
 import store from './redux/reduxStore.js';
 
-let rerenderEntireTree = (state) => {
+let rerenderEntireTree = (store) => {
   ReactDOM.render(
     <React.StrictMode>
       <Router>
-        <App state={state} dispatch={store.dispatch.bind(store)}/>
+        <App store={store} />
       </Router>
     </React.StrictMode>,
     document.getElementById('root')
