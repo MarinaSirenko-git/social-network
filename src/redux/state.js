@@ -1,3 +1,6 @@
+import profileReducer from "./profileReducer";
+import dialogsReducer from "./dialogsReducer";
+
 const dialogs = [
   {id: 1, name: 'Pavel Durov', status: 'online', photoPath: 'https://secretmag.ru/thumb/1800x0/filters:quality(75):no_upscale()/imgs/2021/04/24/10/4631947/db4ace683955496f18d36e8d682c6805e2d87278.jpg' },
   {id: 2, name: 'Ivan Petrov', status: 'offline', photoPath: 'https://secretmag.ru/thumb/1800x0/filters:quality(75):no_upscale()/imgs/2021/04/24/10/4631947/db4ace683955496f18d36e8d682c6805e2d87278.jpg' },
@@ -36,33 +39,9 @@ export const store = {
     this._callSubscriber = observer;
   },
   dispatch(action){
-    if(action.type === 'ADD-POST') {
-      const newPost = {
-        id: Math.random(),
-        userPhotoPath: 'https://upload.wikimedia.org/wikipedia/commons/e/eb/Paul_Thomas_Anderson_2007_crop.jpg',
-        text: this._state.profilePage.newPostText,
-      }
-      this._state.profilePage.posts.push(newPost);
-      this._state.profilePage.newPostText = '';
-      this._callSubscriber(this._state);
-    } else if(action.type === 'CHANGE-POST-TEXT') {
-      this._state.profilePage.newPostText = action.newText;
-      this._callSubscriber(this._state);
-    } else if(action.type === 'CHANGE-USER-MESSAGE-TEXT') {
-      this._state.chatPage.userMessageBody = action.message;
-      this._callSubscriber(this._state);
-    } else if(action.type === 'ADD-MESSAGE') {
-      const newMessage = {
-        id: Math.random(),
-        time: '22:00', 
-        date: Date(), 
-        owner: 'User', 
-        text: this._state.chatPage.userMessageBody,
-      }
-      this._state.chatPage.messages.push(newMessage);
-      this._state.chatPage.userMessageBody = '';
-      this._callSubscriber(this._state);
-    }
+    this._state.profilePage = profileReducer(this._state.profilePage, action);
+    this._state.chatPage = dialogsReducer(this._state.chatPage, action);
+    this._callSubscriber(this._state);
   },
 }
 
