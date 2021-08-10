@@ -4,14 +4,14 @@ import Profile from '../Profile/Profile.jsx';
 import DialogsContainer from '../../containers/DialogsContainer.jsx';
 import './Content.css';
 
-function Content({ store }) {
+function Content() {
   return (
     <main className="content">
       <Route path="/profile">
-        <Profile store={store} />
+        <Profile />
       </Route>
       <Route path="/dialogs">
-        <DialogsContainer store={store} />
+        <DialogsContainer />
       </Route>
     </main>
   )

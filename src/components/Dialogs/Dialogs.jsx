@@ -3,7 +3,7 @@ import FilterContacts from '../FilterContacts/FilterContacts.jsx';
 import MessageInputContainer from '../../containers/MessageInputContainer.jsx';
 import './Dialogs.css';
 
-function Dialogs({ dialogsElements, messagesElements, store }) {
+function Dialogs({ dialogsElements, messagesElements }) {
 
   return(
     <div className="dialogs">
@@ -15,7 +15,7 @@ function Dialogs({ dialogsElements, messagesElements, store }) {
       </div>
       <div className="dialogs__messages">
         {messagesElements}
-        <MessageInputContainer store={store} />
+        <MessageInputContainer />
       </div>
     </div>
   )

@@ -36,8 +36,10 @@ const initialState = {
 export const dialogsReducer = (state = initialState, action) => {
   switch (action.type) {
     case CHANGE_USER_MESSAGE_TEXT:
-      state.userMessageBody = action.message;
-      return state;
+      return {
+        ...state,
+        userMessageBody: action.message,
+      }
     case ADD_MESSAGE:
       const newMessage = {
         id: Math.random(),
@@ -46,9 +48,12 @@ export const dialogsReducer = (state = initialState, action) => {
         owner: 'User', 
         text: state.userMessageBody,
       }
-      state.messages.push(newMessage);
-      state.userMessageBody = '';
-      return state;
+      debugger
+      return {
+        ...state,
+        messages: [...state.messages, newMessage],
+        userMessageBody: '',
+      }
     default:
       return state;
   }

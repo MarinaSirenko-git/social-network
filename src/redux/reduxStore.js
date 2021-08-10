@@ -9,6 +9,6 @@ const reducers = combineReducers({
   profilePage: profileReducer,
 });
 
-const store = createStore(reducers);
+let store = createStore(reducers);
 
 export default store;

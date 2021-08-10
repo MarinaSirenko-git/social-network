@@ -4,12 +4,12 @@ import SideBar from '../SideBar/SideBar.jsx';
 import Content from '../Content/Content.jsx'
 import './App.css';
 
-function App({ store }) {
+function App() {
   return (
     <div className="App">
       <Header />
       <SideBar />
-      <Content store={store} />  
+      <Content />  
     </div>
   );
 }

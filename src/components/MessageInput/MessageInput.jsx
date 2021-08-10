@@ -4,7 +4,7 @@ import './MessageInput.css';
 function MessageInput({userMessageBody, changeChar, sendMessage }) {
 
   const handleTextareaChange = (e) => {
-    changeChar(e.target.value)
+    changeChar(e.target.value);
   }
 
   const handleSubmit = (e) => {

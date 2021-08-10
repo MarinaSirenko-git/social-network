@@ -14,18 +14,22 @@ const initialState = {
 // Если в profileReducer не будет передано значение state, то state по умолчанию будет равен initialState.
 export const profileReducer = (state = initialState, action) => {
   switch (action.type) {
+    case CHANGE_POST_TEXT:
+      return {
+        ...state,
+        newPostText: action.postText,
+      }
     case ADD_POST:
       const newPost = {
         id: Math.random(),
         userPhotoPath: 'https://upload.wikimedia.org/wikipedia/commons/e/eb/Paul_Thomas_Anderson_2007_crop.jpg',
         text: state.newPostText,
       }
-      state.posts.push(newPost);
-      state.newPostText = '';
-      return state;
-    case CHANGE_POST_TEXT:
-      state.newPostText = action.newText;
-      return state;
+      return {
+        ...state,
+        posts: [...state.posts, newPost],
+        newPostText: '',
+      }
     default:
       return state;
   }
@@ -42,7 +46,7 @@ export const postsActionCreator = () => {
 export const changePostActionCreator = (text) => {
   return {
     type: CHANGE_POST_TEXT,
-    newText: text
+    postText: text
   }
 }
 
