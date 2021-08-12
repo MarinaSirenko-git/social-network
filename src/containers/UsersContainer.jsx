@@ -69,27 +69,11 @@ const mapStateToProps = (state) => {
  }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    followUser: (userId) => {
-      dispatch(followActionCreator(userId))
-    },
-    unfollowUser: (userId) => {
-      dispatch(unfollowActionCreator(userId))
-    },
-    setUsers: (usersData) => {
-      dispatch(setUsersActionCreator(usersData))
-    },
-    setCurrentPage: (value) => {
-      dispatch(setCurrentPageActionCreator(value))
-    },
-    setUsersTotalCount: (totalCount) => {
-      dispatch(setUsersTotalCountActionCreator(totalCount))
-    },
-    setIsLoading: (status) => {
-      dispatch(setIsLoadingActionCreator(status))
-    }
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+export default connect(mapStateToProps, {
+  followUser: followActionCreator,
+  unfollowUser: unfollowActionCreator,
+  setUsers: setUsersActionCreator,
+  setCurrentPage: setCurrentPageActionCreator,
+  setUsersTotalCount: setUsersTotalCountActionCreator,
+  setIsLoading: setIsLoadingActionCreator
+  })(UsersContainer);
