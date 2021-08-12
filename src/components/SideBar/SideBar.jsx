@@ -15,7 +15,7 @@ function SideBar() {
           <NavLink to="/dialogs" className="side-bar__link" activeClassName="side-bar__link_active">Сообщения</NavLink>
         </li>
         <li className="side-bar__item">
-          <NavLink to="/news" className="side-bar__link" activeClassName="side-bar__link_active">Новости</NavLink>
+          <NavLink to="/users" className="side-bar__link" activeClassName="side-bar__link_active">Поиск друзей</NavLink>
           </li>
         <li className="side-bar__item">
           <NavLink to="/music" className="side-bar__link" activeClassName="side-bar__link_active">Музыка</NavLink>

@@ -48,7 +48,6 @@ export const dialogsReducer = (state = initialState, action) => {
         owner: 'User', 
         text: state.userMessageBody,
       }
-      debugger
       return {
         ...state,
         messages: [...state.messages, newMessage],
