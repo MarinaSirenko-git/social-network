@@ -7,3 +7,4 @@ export const UNFOLLOW = 'UNFOLLOW';
 export const USERS_QUERY ='USERS-QUERY';
 export const CURRENT_PAGE = 'CURRENT-PAGE';
 export const TOTAL_COUNT = 'TOTAL-COUNT';
+export const IS_LOADING = 'IS-LOADING';
