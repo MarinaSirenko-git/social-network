@@ -5,21 +5,22 @@ import {
   setUsersActionCreator, 
   setCurrentPageActionCreator, 
   setUsersTotalCountActionCreator,
-  setIsLoadingActionCreator
+  setIsLoadingActionCreator,
+  setIsFetchingActionCreator
  } from "../redux/usersReducer";
-import axios from 'axios';
 import React from 'react';
 import Users from './../components/Users/Users.jsx';
 import Preloader from "../components/Preloader/Preloader";
+import { getUsers } from '../utils/api.js';
 
 class UsersContainer extends React.Component {
 
   componentDidMount() {
     this.props.setIsLoading(true);
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.pageSize}`)
-    .then((res) => {
-      this.props.setUsers(res.data.items);
-      this.props.setUsersTotalCount(res.data.totalCount);
+    getUsers(this.props.currentPage, this.pageSize)
+    .then((data) => {
+      this.props.setUsers(data.items);
+      this.props.setUsersTotalCount(data.totalCount);
     })
     .catch((e) => console.log(e))
     .finally(() => {
@@ -30,9 +31,9 @@ class UsersContainer extends React.Component {
   onPageChanged = (pageNumber) => {
     this.props.setCurrentPage(pageNumber);
     this.props.setIsLoading(true);
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.pageSize}`)
-    .then((res) => {
-      this.props.setUsers(res.data.items); 
+    getUsers(pageNumber, this.pageSize)
+    .then((data) => {
+      this.props.setUsers(data.items); 
     })
     .catch((e) => console.log(e))
     .finally(() => {
@@ -52,7 +53,9 @@ class UsersContainer extends React.Component {
         users={this.props.users}
         unfollowUser={this.props.unfollowUser}
         followUser={this.props.followUser}
-        />
+        setIsFetching={this.props.setIsFetching}
+        isFetching={this.props.isFetching}
+      />
       }
     </>
     )
@@ -65,7 +68,8 @@ const mapStateToProps = (state) => {
     pageSize: state.usersPage.pageSize,
     totalUsersCount: state.usersPage.totalUsersCount,
     currentPage: state.usersPage.currentPage,
-    isLoading: state.usersPage.isLoading
+    isLoading: state.usersPage.isLoading,
+    isFetching: state.usersPage.isFetching,
  }
 }
 
@@ -75,5 +79,6 @@ export default connect(mapStateToProps, {
   setUsers: setUsersActionCreator,
   setCurrentPage: setCurrentPageActionCreator,
   setUsersTotalCount: setUsersTotalCountActionCreator,
-  setIsLoading: setIsLoadingActionCreator
+  setIsLoading: setIsLoadingActionCreator,
+  setIsFetching: setIsFetchingActionCreator,
   })(UsersContainer);

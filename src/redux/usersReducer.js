@@ -1,4 +1,11 @@
-import { FOLLOW, UNFOLLOW, USERS_QUERY, CURRENT_PAGE, TOTAL_COUNT, IS_LOADING } from "./actionTypeConsts";
+import { 
+  FOLLOW, 
+  UNFOLLOW, 
+  USERS_QUERY, 
+  CURRENT_PAGE, 
+  TOTAL_COUNT, 
+  IS_LOADING,
+  IS_FETCHING } from "./actionTypeConsts";
 
 const initialState = {
   users: [],
@@ -6,6 +13,7 @@ const initialState = {
   totalUsersCount: 0,
   currentPage: 1,
   isLoading: false,
+  isFetching: [],
 }
 
 export const usersReducer = (state = initialState, action) => {
@@ -49,6 +57,14 @@ export const usersReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: action.status
+      }
+    }
+    case IS_FETCHING: {
+      return {
+        ...state,
+        isFetching: action.status ? 
+        [...state.isFetching, action.userId] : 
+        state.isFetching.filter((id) => id !== action.userId)
       }
     }
     default:
@@ -95,5 +111,13 @@ export const setIsLoadingActionCreator = (status) => {
   return {
     type: IS_LOADING,
     status,
+  }
+}
+
+export const setIsFetchingActionCreator = (status, userId) => {
+  return {
+    type: IS_FETCHING,
+    status,
+    userId
   }
 }

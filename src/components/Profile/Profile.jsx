@@ -4,11 +4,11 @@ import PostsContainer from '../../containers/PostsContainer.jsx';
 import AboutUser from '../AboutUser/AboutUser.jsx';
 import './Profile.css';
 
-function Profile() {
+function Profile({profileUserData}) {
   return(
     <section className="profile">
       <Poster />
-      <AboutUser />
+      {profileUserData && <AboutUser profileUserData={profileUserData} />}
       <PostsContainer />
     </section>
   )

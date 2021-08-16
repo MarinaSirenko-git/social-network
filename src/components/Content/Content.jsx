@@ -1,15 +1,15 @@
 import React from 'react';
 import { Route } from "react-router-dom";
-import Profile from '../Profile/Profile.jsx';
 import DialogsContainer from '../../containers/DialogsContainer.jsx';
 import UsersContainer from '../../containers/UsersContainer.jsx';
+import ProfileContainer from '../../containers/ProfileContainer.jsx';
 import './Content.css';
 
 function Content() {
   return (
     <main className="content">
-      <Route path="/profile">
-        <Profile />
+      <Route path="/profile/:userId?">
+        <ProfileContainer />
       </Route>
       <Route path="/dialogs">
         <DialogsContainer />

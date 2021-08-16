@@ -1,4 +1,4 @@
-import { CHANGE_POST_TEXT, ADD_POST } from './actionTypeConsts.js';
+import { CHANGE_POST_TEXT, ADD_POST, SET_USER_PROFILE } from './actionTypeConsts.js';
 
 const initialState = {
   posts: [
@@ -9,6 +9,7 @@ const initialState = {
     },
 ],
   newPostText: '',
+  userProfile: null,
 };
 
 // Если в profileReducer не будет передано значение state, то state по умолчанию будет равен initialState.
@@ -30,6 +31,11 @@ export const profileReducer = (state = initialState, action) => {
         posts: [...state.posts, newPost],
         newPostText: '',
       }
+    case SET_USER_PROFILE:
+      return {
+        ...state, 
+        userProfile: action.userProfile,
+      }
     default:
       return state;
   }
@@ -47,6 +53,13 @@ export const changePostActionCreator = (text) => {
   return {
     type: CHANGE_POST_TEXT,
     postText: text
+  }
+}
+
+export const setUserProfileActionCreator = (userProfile) => {
+  return {
+    type: SET_USER_PROFILE,
+    userProfile,
   }
 }
 

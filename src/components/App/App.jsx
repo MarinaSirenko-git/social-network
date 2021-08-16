@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../Header/Header.jsx';
+import HeaderContainer from '../../containers/HeaderContainer.jsx';
 import SideBar from '../SideBar/SideBar.jsx';
 import Content from '../Content/Content.jsx'
 import './App.css';
@@ -7,7 +7,7 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <Header />
+      <HeaderContainer />
       <SideBar />
       <Content />  
     </div>

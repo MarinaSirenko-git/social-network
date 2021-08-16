@@ -8,3 +8,6 @@ export const USERS_QUERY ='USERS-QUERY';
 export const CURRENT_PAGE = 'CURRENT-PAGE';
 export const TOTAL_COUNT = 'TOTAL-COUNT';
 export const IS_LOADING = 'IS-LOADING';
+export const SET_USER_PROFILE = 'SET-USER-PROFILE';
+export const SET_USER_DATA = 'SET-USER-DATA';
+export const IS_FETCHING = 'IS-FETCHING';
