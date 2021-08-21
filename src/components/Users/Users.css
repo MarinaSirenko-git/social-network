@@ -2,3 +2,34 @@
   background-color: black;
   color: white;
 }
+
+.users {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.users__pagination {
+  margin-bottom: 30px;
+}
+
+.users__cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.ant-card-bordered .ant-card-cover {
+  overflow: hidden;
+  max-height: 180px;
+}
+
+.ant-card-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ant-btn-dashed {
+  margin-top: 10px;
+}

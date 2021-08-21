@@ -18,7 +18,7 @@ function SideBar() {
           <NavLink to="/users" className="side-bar__link" activeClassName="side-bar__link_active">Поиск друзей</NavLink>
           </li>
         <li className="side-bar__item">
-          <NavLink to="/music" className="side-bar__link" activeClassName="side-bar__link_active">Музыка</NavLink>
+          <a href="https://www.spotify.com/kg-ru/" className="side-bar__link" activeClassName="side-bar__link_active" target="_blank" rel="noreferrer">Музыка</a>
         </li>
       </ul>
     </nav>

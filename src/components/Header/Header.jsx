@@ -9,7 +9,7 @@ function Header({isAuth, userName}) {
     className="logo" 
     src="https://image.flaticon.com/icons/png/512/8/8723.png" 
     alt="логотип" />
-    {isAuth ? userName : <NavLink className="header__link" to={'/login'}>Войти</NavLink>}
+    <p className="header__user-name">{isAuth ? userName : <NavLink className="header__link" to={'/login'}>Войти</NavLink>}</p>
   </header>
  )
 }

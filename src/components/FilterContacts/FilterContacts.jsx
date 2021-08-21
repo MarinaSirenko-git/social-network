@@ -1,9 +1,18 @@
 import React from 'react';
+import { Input } from 'antd';
 import './FilterContacts.css';
 
-function FilterContacts() {
+function FilterContacts({onSearch}) {
+  const { Search } = Input;
   return(
-    <input className="filter-contacts" type="search" placeholder="search" />
+    <Search
+      className="filter-contacts"
+      placeholder="введите имя"
+      allowClear
+      enterButton="Search"
+      size="medium"
+      onSearch={onSearch}
+  />
   )
 }
 

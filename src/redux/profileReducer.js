@@ -1,15 +1,17 @@
-import { CHANGE_POST_TEXT, ADD_POST, SET_USER_PROFILE } from './actionTypeConsts.js';
+import { CHANGE_POST_TEXT, ADD_POST, SET_USER_PROFILE, SET_USER_STATUS } from './actionTypeConsts.js';
+import { profileApi} from '../utils/api.js';
 
 const initialState = {
   posts: [
     {
       id: Math.random(), 
-      userPhotoPath: 'https://upload.wikimedia.org/wikipedia/commons/e/eb/Paul_Thomas_Anderson_2007_crop.jpg',
+      userPhotoPath: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
       text: 'Make your mama sad type Make your girlfriend mad tight Might seduce your dad type I am the bad guy, duh I am the bad guy, duh'
     },
 ],
   newPostText: '',
   userProfile: null,
+  userStatus: '',
 };
 
 // Если в profileReducer не будет передано значение state, то state по умолчанию будет равен initialState.
@@ -23,7 +25,7 @@ export const profileReducer = (state = initialState, action) => {
     case ADD_POST:
       const newPost = {
         id: Math.random(),
-        userPhotoPath: 'https://upload.wikimedia.org/wikipedia/commons/e/eb/Paul_Thomas_Anderson_2007_crop.jpg',
+        userPhotoPath: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
         text: state.newPostText,
       }
       return {
@@ -36,6 +38,11 @@ export const profileReducer = (state = initialState, action) => {
         ...state, 
         userProfile: action.userProfile,
       }
+    case SET_USER_STATUS:
+      return {
+        ...state, 
+        userStatus: action.userStatus,
+      }  
     default:
       return state;
   }
@@ -63,4 +70,36 @@ export const setUserProfileActionCreator = (userProfile) => {
   }
 }
 
+export const setUserStatusActionCreator = (userStatus) => {
+  return {
+    type: SET_USER_STATUS,
+    userStatus,
+  }
+}
 
+export const getUserDataThunkCreator = (userId) => {
+  return (dispatch) => {
+    profileApi.getUserData(userId)
+    .then((data) => dispatch(setUserProfileActionCreator(data)))
+    .catch((e) => console.log(e))
+  }
+}
+
+export const getUserStatusThunkCreator = (userId) => {
+  return (dispatch) => {
+    profileApi.getStatus(userId)
+    .then((status) => {
+      dispatch(setUserStatusActionCreator(status))})
+    .catch((e) => console.log(e))
+  }
+}
+
+export const updateUserStatusThunkCreator = (status) => {
+  return (dispatch) => {
+    profileApi.updateStatus(status)
+    .then((data) => {
+      if(data.resultCode === 0) dispatch(setUserStatusActionCreator(data.status))
+    })
+    .catch((e) => console.log(e))
+  }
+}

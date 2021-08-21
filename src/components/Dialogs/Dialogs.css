@@ -6,12 +6,16 @@
 }
 
 .dialogs__contacts {
-  background-color: #000000eb;
+  background-color: #a8c6fc;
   padding: 20px;
 }
 
 .dialogs__messages {
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-height: 100vh;
 }
 
 .dialogs__list {
@@ -19,4 +23,10 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.dialogs__list_type_message-box {
+  max-height: 60%;
+  height: 60%;
+  overflow-y: scroll;
 }

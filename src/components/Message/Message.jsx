@@ -1,13 +1,23 @@
 import React from 'react';
+import { Comment, Tooltip } from 'antd';
+import moment from 'moment';
 import './Message.css';
 
-function Message({time, date, name, text}) {
+function Message({owner, text}) {
   return (
-    <div className="message">
-      <span className="message__date">{`${time} ${date}`}</span>
-      <span className="message__user-name">{name}</span>
-      <div className="message__text">{text}</div>
-    </div>
+    <li className="message">
+      <Comment
+      author={<p>{owner}</p>}
+      content={
+        <p>{text}</p>
+      }
+      datetime={
+        <Tooltip title={moment().format('YYYY-MM-DD HH:mm:ss')}>
+          <span>{moment().fromNow()}</span>
+        </Tooltip>
+      }
+    />
+    </li>
   )
 }
 

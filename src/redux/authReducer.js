@@ -1,4 +1,5 @@
-import { SET_USER_DATA } from './actionTypeConsts.js'
+import { SET_USER_DATA } from './actionTypeConsts.js';
+import { authApi } from './../utils/api.js';
 
 const initialState = {
   id: null,
@@ -24,5 +25,17 @@ export const setAuthDataActionCreator = ({id, email, login}) => {
   return {
     type: SET_USER_DATA,
     data: {id, email, login}
+  }
+}
+
+export const tokenCheckThunkCreator = () => {
+  return (dispatch) => { 
+  authApi.tokenCheck()
+    .then((data) => {
+      if(data.resultCode === 0) {
+        dispatch(setAuthDataActionCreator(data.data));
+      }
+    })
+    .catch((e) => console.log(e))
   }
 }

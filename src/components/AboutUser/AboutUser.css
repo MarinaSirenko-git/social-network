@@ -1,5 +1,5 @@
 .about-user {
-  padding: 25px 0 0 135px;
+  padding: 25px 0 0 0;
 }
 
 .about-user__avatar {
@@ -17,10 +17,12 @@
 
 .about-user__img {
   display: block;
-  -webkit-filter: grayscale(100%);
-  filter: grayscale(100%);
   width: 100%;
   object-fit: cover;
+}
+
+.about-user__desc-wrap {
+  padding-left: 135px;
 }
 
 .about-user__desc {

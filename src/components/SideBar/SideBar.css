@@ -1,7 +1,7 @@
 .side-bar {
   width: 300px;
   box-shadow: 0 0 4px 0 #dce1e6, 0 0 4px 1px #d3dce6;
-  padding: 20px 10px 20px 50px;
+  padding: 40px 10px 20px 50px;
   box-sizing: border-box;
   background-color:white;
 }
@@ -19,6 +19,7 @@
 .side-bar__link {
   text-decoration: none;
   color: black;
+  font-size: 16px;
   transition: font-weight 0.1s ease;
 }
 

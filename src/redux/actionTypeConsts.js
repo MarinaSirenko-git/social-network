@@ -11,3 +11,4 @@ export const IS_LOADING = 'IS-LOADING';
 export const SET_USER_PROFILE = 'SET-USER-PROFILE';
 export const SET_USER_DATA = 'SET-USER-DATA';
 export const IS_FETCHING = 'IS-FETCHING';
+export const SET_USER_STATUS = 'SET-USER-STATUS';

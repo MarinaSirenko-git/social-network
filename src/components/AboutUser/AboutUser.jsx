@@ -1,19 +1,23 @@
 import React from 'react';
+import ProfileStatus from '../ProfileStatus/ProfileStatus';
 import './AboutUser.css';
 
-function AboutUser({profileUserData}){
+function AboutUser({profileUserData, userStatus, updateUserStatus}){
   return (
     <div className="about-user">
       <div className="about-user__avatar">
         <img
           className="about-user__img" 
-          src={profileUserData.photos === null
-          ? 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Paul_Thomas_Anderson_2007_crop.jpg/220px-Paul_Thomas_Anderson_2007_crop.jpg'
+          src={profileUserData.photos.large === null || profileUserData.photos === ''
+          ? 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
           : profileUserData.photos.large}
           alt="фото" />
       </div>
-      <span className="about-user__desc about-user__desc_type_name">Пол Андерсон</span>
-      <span className="about-user__desc">Кинорежиссёр</span>
+      <div className="about-user__desc-wrap">
+        <span className="about-user__desc about-user__desc_type_name">Han Solo</span>
+        <span className="about-user__desc">Frontend-разработчик</span>
+      </div>
+      <ProfileStatus userStatus={userStatus} updateStatus={updateUserStatus}/>
     </div>
   )
 }

@@ -3,6 +3,7 @@ import { Route } from "react-router-dom";
 import DialogsContainer from '../../containers/DialogsContainer.jsx';
 import UsersContainer from '../../containers/UsersContainer.jsx';
 import ProfileContainer from '../../containers/ProfileContainer.jsx';
+import Login from '../Login/Login.jsx';
 import './Content.css';
 
 function Content() {
@@ -16,6 +17,9 @@ function Content() {
       </Route>
       <Route path="/users">
         <UsersContainer />
+      </Route>
+      <Route path="/login">
+        <Login />
       </Route>
     </main>
   )

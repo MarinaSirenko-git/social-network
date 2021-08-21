@@ -7,9 +7,11 @@ import {
   IS_LOADING,
   IS_FETCHING } from "./actionTypeConsts";
 
+import { usersApi } from "../utils/api";
+
 const initialState = {
   users: [],
-  pageSize: 25,
+  pageSize: 24,
   totalUsersCount: 0,
   currentPage: 1,
   isLoading: false,
@@ -119,5 +121,48 @@ export const setIsFetchingActionCreator = (status, userId) => {
     type: IS_FETCHING,
     status,
     userId
+  }
+}
+
+export const getUsersThunkCreator = (currentPage, pageSize) => { 
+  return (dispatch) => {
+    // dispatch(setIsLoadingActionCreator(true));
+    usersApi.getUsers(currentPage, pageSize)
+    .then((data) => {
+      dispatch(setUsersActionCreator(data.items));
+      dispatch(setUsersTotalCountActionCreator(data.totalCount));
+    })
+    .catch((e) => console.log(e))
+    .finally(() => {
+      dispatch(setIsLoadingActionCreator(false));
+    })
+  }
+}
+
+export const followUserThunkCreator = (userId) => {
+  return (dispatch) => {
+    dispatch(setIsFetchingActionCreator(true, userId))
+    usersApi.followUserQuery(userId)
+    .then(data => {
+      if(data.resultCode === 0) {
+        dispatch(followActionCreator(userId))
+      }
+    })
+    .catch(e => console.log(e))
+    .finally(() => dispatch(setIsFetchingActionCreator(false, userId)))
+  }
+}
+
+export const unfollowUserThunkCreator = (userId) => {
+  return (dispatch) => {
+    dispatch(setIsFetchingActionCreator(true, userId))
+    usersApi.unfollowUserQuery(userId)
+    .then(data => {
+      if(data.resultCode === 0) {
+        dispatch(unfollowActionCreator(userId))
+      }
+    })
+    .catch(e => console.log(e))
+    .finally(() => dispatch(setIsFetchingActionCreator(false, userId)))
   }
 }

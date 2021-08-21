@@ -1,9 +1,11 @@
 import React from 'react';
+import { Spin } from 'antd';
+import './Preloader.css';
 
 function Preloader(){
   return (
-    <div>
-      <p>...Loading</p>
+    <div className="preloader">
+      <Spin />
     </div>
   )
 }

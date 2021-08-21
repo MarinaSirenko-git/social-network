@@ -1,7 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { photoPlug } from '../../utils/consts';
-import { followUserQuery, unfollowUserQuery } from '../../utils/api';
+import { Card, Avatar, Button, Pagination } from 'antd';
+import {getFirstChar} from '../../utils/utils.js';
 import './Users.css';
 
 function Users ({
@@ -10,9 +11,8 @@ function Users ({
   currentPage, 
   onPageChanged, 
   users, 
-  unfollowUser, 
-  followUser,
-  setIsFetching,
+  unfollowUserThunk, 
+  followUserThunk,
   isFetching
   }) {
 
@@ -22,54 +22,50 @@ function Users ({
     pages.push(i)
   }
 
+  const { Meta } = Card;
+
   return (
-    <div>
+    <section className="users">
+      <div className="users__pagination">
+        <Pagination onChange={onPageChanged} defaultCurrent={currentPage} total={totalUsersCount} />
+      </div>
+      <div className="users__cards">
+        {users.map((u) => { return <Card 
+          key={u.id * Math.random()} 
+          style={{ width: 300 }} 
+          cover={<img alt="обложка" src={photoPlug}/>}
+          >
+            <Meta avatar={
+              <NavLink to={`/profile/${u.id}`}>
+                {/* <Avatar src={u.photos.small === null ? photoPlug : u.photos.small} alt="фото пользователя" /> */}
+                <Avatar
+                  style={{
+                    color: '#f56a00',
+                    backgroundColor: '#fde3cf',
+                  }}
+                >
+                  {getFirstChar(u.name)}
+                </Avatar>
+              </NavLink>
+            } title={u.name} description="Frontend-разработчик"
+            />
+            {u.isFollow 
+              ?
+              <Button type="dashed" disabled={isFetching.some(i => i === u.id)} onClick={() => unfollowUserThunk(u.id)}>Удалить из друзей</Button> 
+              : 
+              <Button type="dashed" disabled={isFetching.some(i => i === u.id)} onClick={() => followUserThunk(u.id)}>Добавить в друзья</Button> }
+          </Card>})
+        }
+      </div>
       <div>
-        {pages.map(i => <button key={Math.random()} 
+        {/* {pages.map(i => <button key={Math.random()} 
           className={currentPage === i ? 'pagination-btn_active' : ''} 
           type="button"
           onClick={() => {onPageChanged(i)}}>
           {i}
-        </button>)}
+        </button>)} */}
       </div>
-      <ul>
-      {users.map((u) => {
-          return <li key={u.id * Math.random()}>
-            <NavLink to={`/profile/${u.id}`}>
-              <img src={u.photos.small === null ? photoPlug : u.photos.small} alt="фото пользователя" />
-            </NavLink>
-            <span>{u.name}</span>
-            {u.isFollow 
-            ?
-            <button disabled={isFetching.some(i => i === u.id)} onClick={() => {
-              setIsFetching(true, u.id)
-              unfollowUserQuery(u.id)
-              .then(data => {
-                if(data.resultCode === 0) {
-                  unfollowUser(u.id)
-                }
-              })
-              .catch(e => console.log(e))
-              .finally(() => setIsFetching(false, u.id))
-            }}>Удалить из друзей</button> 
-            : 
-            <button disabled={isFetching.some(i => i === u.id)} onClick={() => {
-              console.log(isFetching.some(i => i === u.id))
-              console.log(u.id)
-              setIsFetching(true, u.id)
-              followUserQuery(u.id)
-              .then(data => {
-                if(data.resultCode === 0) {
-                  followUser(u.id)
-                }
-              })
-              .catch(e => console.log(e))
-              .finally(() => setIsFetching(false, u.id)) 
-            }}>Добавить в друзья</button> }
-          </li>})
-        }
-      </ul>
-    </div>
+    </section>
   )
 }
 
