@@ -1,3 +1,3 @@
-export const getFirstChar = (str) => {
-  return str[0].toUpperCase();
-}
+export const getFirstChar = (str) => str[0].toUpperCase();
+
+export const doItFunc = () => 'test';

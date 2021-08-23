@@ -2,9 +2,9 @@ import React from 'react';
 import { Input } from 'antd';
 import './FilterContacts.css';
 
-function FilterContacts({onSearch}) {
+function FilterContacts({ onSearch }) {
   const { Search } = Input;
-  return(
+  return (
     <Search
       className="filter-contacts"
       placeholder="введите имя"
@@ -12,8 +12,8 @@ function FilterContacts({onSearch}) {
       enterButton="Search"
       size="medium"
       onSearch={onSearch}
-  />
-  )
+    />
+  );
 }
 
 export default FilterContacts;

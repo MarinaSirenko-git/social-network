@@ -1,12 +1,12 @@
 import React from 'react';
-import FilterContacts from '../FilterContacts/FilterContacts.jsx'; 
-import MessageInputContainer from '../../containers/MessageInputContainer.jsx';
-import './Dialogs.css';
 import { Redirect } from 'react-router-dom';
+import FilterContacts from '../FilterContacts/FilterContacts';
+import MessageInputContainer from '../../containers/MessageInputContainer';
+import './Dialogs.css';
 
 function Dialogs({ dialogsElements, messagesElements, isAuth }) {
-  if(isAuth === false) {return <Redirect to={'/login'}/>}
-  return(
+  if (isAuth === false) { return <Redirect to="/login" />; }
+  return (
     <div className="dialogs">
       <div className="dialogs__contacts">
         <ul className="dialogs__list">
@@ -21,7 +21,7 @@ function Dialogs({ dialogsElements, messagesElements, isAuth }) {
         <MessageInputContainer />
       </div>
     </div>
-  )
+  );
 }
 
 export default Dialogs;

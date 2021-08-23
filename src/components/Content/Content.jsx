@@ -1,9 +1,9 @@
 import React from 'react';
-import { Route } from "react-router-dom";
-import DialogsContainer from '../../containers/DialogsContainer.jsx';
-import UsersContainer from '../../containers/UsersContainer.jsx';
-import ProfileContainer from '../../containers/ProfileContainer.jsx';
-import Login from '../Login/Login.jsx';
+import { Route } from 'react-router-dom';
+import DialogsContainer from '../../containers/DialogsContainer';
+import UsersContainer from '../../containers/UsersContainer';
+import ProfileContainer from '../../containers/ProfileContainer';
+import Login from '../Login/Login';
 import './Content.css';
 
 function Content() {
@@ -22,7 +22,7 @@ function Content() {
         <Login />
       </Route>
     </main>
-  )
+  );
 }
 
 export default Content;

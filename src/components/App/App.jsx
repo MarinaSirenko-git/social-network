@@ -1,7 +1,7 @@
 import React from 'react';
-import HeaderContainer from '../../containers/HeaderContainer.jsx';
-import SideBar from '../SideBar/SideBar.jsx';
-import Content from '../Content/Content.jsx'
+import HeaderContainer from '../../containers/HeaderContainer';
+import SideBar from '../SideBar/SideBar';
+import Content from '../Content/Content';
 import './App.css';
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
     <div className="App">
       <HeaderContainer />
       <SideBar />
-      <Content />  
+      <Content />
     </div>
   );
 }
