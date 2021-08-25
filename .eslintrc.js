@@ -19,10 +19,12 @@ module.exports = {
   ],
   rules: {
     'no-underscore-dangle': 0,
+    'no-debugger': 0,
     'react/jsx-props-no-spreading': 'off',
     'linebreak-style': 0,
     'no-console': 0,
     'react/destructuring-assignment': 0,
     'react/prop-types': 0,
+    'eslint arrow-body-style': 0,
   },
 };

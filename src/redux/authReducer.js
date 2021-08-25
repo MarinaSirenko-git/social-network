@@ -1,4 +1,4 @@
-import { SET_USER_DATA } from './actionTypeConsts';
+import { SET_USER_DATA, LOGIN, LOGOUT } from './actionTypeConsts';
 import { authApi } from '../utils/api';
 
 const initialState = {
@@ -16,6 +16,19 @@ export const authReducer = (state = initialState, action) => {
         ...action.data,
         isAuth: true,
       };
+    case LOGIN:
+      return {
+        ...state,
+        isAuth: true,
+      };
+    case LOGOUT:
+      return {
+        ...state,
+        id: null,
+        email: null,
+        login: null,
+        isAuth: false,
+      };
     default:
       return state;
   }
@@ -26,6 +39,14 @@ export const setAuthDataActionCreator = ({ id, email, login }) => ({
   data: { id, email, login },
 });
 
+export const setIsAuthTrueActionCreator = () => ({
+  type: LOGIN,
+});
+
+export const setIsAuthFalseActionCreator = () => ({
+  type: LOGOUT,
+});
+
 export const tokenCheckThunkCreator = () => (dispatch) => {
   authApi.tokenCheck()
     .then((data) => {
@@ -34,4 +55,22 @@ export const tokenCheckThunkCreator = () => (dispatch) => {
       }
     })
     .catch((e) => console.log(e));
+};
+
+export const loginThunkCreator = (email, password, isRememberMe) => (dispatch) => {
+  authApi.login(email, password, isRememberMe)
+    .then((data) => {
+      if (data.resultCode === 0) {
+        dispatch(setIsAuthTrueActionCreator);
+      }
+    });
+};
+
+export const logoutThunkCreator = () => (dispatch) => {
+  authApi.logout()
+    .then((data) => {
+      if (data.resultCode === 0) {
+        dispatch(setIsAuthFalseActionCreator);
+      }
+    });
 };

@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Form, Input, Button, Checkbox,
 } from 'antd';
 import './Login.css';
 
-function Login() {
+function Login({ loginThunkCreator, isAuth }) {
+  useEffect(() => {
+    console.log(isAuth);
+  }, [isAuth]);
+
   const onFinish = (values) => {
-    console.log('Success:', values);
+    loginThunkCreator(values.username, values.password, values.remember);
   };
 
   const onFinishFailed = (errorInfo) => {

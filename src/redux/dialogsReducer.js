@@ -1,4 +1,7 @@
-import { CHANGE_USER_MESSAGE_TEXT, ADD_MESSAGE, ADD_DIALOG } from './actionTypeConsts';
+import {
+  CHANGE_USER_MESSAGE_TEXT, ADD_MESSAGE, ADD_DIALOG, ADD_DIALOGS,
+} from './actionTypeConsts';
+import { profileApi } from '../utils/api';
 
 const initialState = {
   dialogs: [
@@ -61,11 +64,16 @@ export const dialogsReducer = (state = initialState, action) => {
       return {
         ...state,
         dialogs: [...state.dialogs, {
-          id: Math.random(),
+          id: action.id,
           name: action.dialogName,
           status: 'online',
           photoPath: action.photoPath,
         }],
+      };
+    case ADD_DIALOGS:
+      return {
+        ...state,
+        dialogs: [...state.dialogs].concat(action.frends),
       };
     default:
       return state;
@@ -85,8 +93,22 @@ export const addMessageActionCreator = () => ({
   type: ADD_MESSAGE,
 });
 
-export const addDialogActionCreator = (dialogName, photoPath) => ({
+export const addDialogActionCreator = (id, dialogName, photoPath) => ({
   type: ADD_DIALOG,
+  id,
   dialogName,
   photoPath,
 });
+
+export const addDialogsActionCreator = (frends) => ({
+  type: ADD_DIALOGS,
+  frends,
+});
+
+export const addDialogsThunkCreator = () => (dispatch) => {
+  profileApi.addFriends()
+    .then((data) => {
+      if (data.resultCode === 0) dispatch(addDialogsActionCreator(data.items));
+    })
+    .catch((e) => console.log(e));
+};

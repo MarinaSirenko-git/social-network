@@ -9,14 +9,14 @@ function MessageInput({ userMessageBody, changeChar, sendMessage }) {
     changeChar(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleButtonClick = (e) => {
     sendMessage(e);
   };
 
   return (
-    <form className="message-input" onSubmit={handleSubmit}>
+    <form className="message-input">
       <TextArea className="message-input__text" placeholder="Введите сообщение" onChange={handleTextareaChange} value={userMessageBody} rows={4} />
-      <Button onClick={handleSubmit} type="primary">Отправить</Button>
+      <Button onClick={handleButtonClick} type="primary">Отправить</Button>
     </form>
   );
 }

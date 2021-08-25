@@ -38,11 +38,23 @@ export const usersApi = {
     return instance.delete(`${BASE_URL}/follow/${id}`)
       .then((res) => res.data);
   },
+  getFriends() {
+    return instance.get(`${BASE_URL}/users?friend=true`)
+      .then((res) => res.data.items);
+  },
 };
 
 export const authApi = {
   tokenCheck() {
     return instance.get(`${BASE_URL}/auth/me`)
+      .then((res) => res.data);
+  },
+  login(email, password, rememberMe) {
+    return instance.post(`${BASE_URL}/auth/login`, { email, password, rememberMe })
+      .then((res) => res.data);
+  },
+  logout() {
+    return instance.delete(`${BASE_URL}/auth/login`)
       .then((res) => res.data);
   },
 };

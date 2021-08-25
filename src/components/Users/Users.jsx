@@ -15,6 +15,7 @@ function Users({
   unfollowUserThunk,
   followUserThunk,
   isFetching,
+  addDialog,
 }) {
   // const pageCount = Math.ceil(totalUsersCount / pageSize);
   // const pages = [];
@@ -23,6 +24,11 @@ function Users({
   // }
 
   const { Meta } = Card;
+
+  const handleFollowButtonClick = (id, name, photoPath) => {
+    followUserThunk(id);
+    addDialog(id, name, photoPath);
+  };
 
   return (
     <section className="users">
@@ -54,7 +60,7 @@ function Users({
             />
             {u.isFollow
               ? <Button type="dashed" disabled={isFetching.some((i) => i === u.id)} onClick={() => unfollowUserThunk(u.id)}>Удалить из друзей</Button>
-              : <Button type="dashed" disabled={isFetching.some((i) => i === u.id)} onClick={() => followUserThunk(u.id)}>Добавить в друзья</Button> }
+              : <Button type="dashed" disabled={isFetching.some((i) => i === u.id)} onClick={() => handleFollowButtonClick(u.id, u.name, u.photos.large)}>Добавить в друзья</Button> }
           </Card>
         ))}
       </div>

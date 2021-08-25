@@ -3,7 +3,7 @@ import { changeMessageActionCreator, addMessageActionCreator } from '../redux/di
 import MessageInput from '../components/MessageInput/MessageInput';
 
 const mapStateToProps = (state) => ({
-  userMessageBody: state.userMessageBody,
+  userMessageBody: state.chatPage.userMessageBody,
 });
 
 const mapDispatchToProps = (dispatch) => ({

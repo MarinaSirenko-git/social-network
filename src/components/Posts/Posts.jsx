@@ -12,21 +12,21 @@ function Posts({
     changeChar(e.target.value);
   };
 
-  const handleFormSubmit = (e) => {
+  const handleButtonClick = (e) => {
     publishPost(e);
   };
 
   return (
     <div className="post-container">
       <h2 className="post-container__title">Мои посты</h2>
-      <form className="post-form" onSubmit={handleFormSubmit}>
+      <form className="post-form">
         <TextArea
           rows={4}
           placeholder="Введите сообщение"
           onChange={handleTextariaChange}
           value={newPostText}
         />
-        <Button type="primary">Опубликовать</Button>
+        <Button type="primary" onClick={handleButtonClick}>Опубликовать</Button>
       </form>
       { posts.map((p) => <Post key={p.id} userPhotoPath={p.userPhotoPath} text={p.text} />) }
     </div>

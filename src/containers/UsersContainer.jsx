@@ -1,11 +1,15 @@
 import { connect } from 'react-redux';
 import React from 'react';
 import {
+  getUsers, getPageSize, getTotalUsersCount, getCurrentPage, getIsLoading, getisFetching, getIsAuth,
+} from '../redux/usersSelector';
+import {
   setCurrentPageActionCreator,
   getUsersThunkCreator,
   followUserThunkCreator,
   unfollowUserThunkCreator,
 } from '../redux/usersReducer';
+import { addDialogActionCreator } from '../redux/dialogsReducer';
 import Users from '../components/Users/Users';
 import Preloader from '../components/Preloader/Preloader';
 import AuthRedirect from '../hoc/AuthRedirect';
@@ -39,6 +43,7 @@ class UsersContainer extends React.Component {
               unfollowUserThunk={this.props.unfollowUserThunk}
               followUserThunk={this.props.followUserThunk}
               isFetching={this.props.isFetching}
+              addDialog={this.props.addDialog}
             />
           )}
       </>
@@ -47,13 +52,13 @@ class UsersContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  users: state.usersPage.users,
-  pageSize: state.usersPage.pageSize,
-  totalUsersCount: state.usersPage.totalUsersCount,
-  currentPage: state.usersPage.currentPage,
-  isLoading: state.usersPage.isLoading,
-  isFetching: state.usersPage.isFetching,
-  isAuth: state.auth.isAuth,
+  users: getUsers(state),
+  pageSize: getPageSize(state),
+  totalUsersCount: getTotalUsersCount(state),
+  currentPage: getCurrentPage(state),
+  isLoading: getIsLoading(state),
+  isFetching: getisFetching(state),
+  isAuth: getIsAuth(state),
 });
 
 const withAuthRedirectUsers = AuthRedirect(UsersContainer);
@@ -63,4 +68,5 @@ export default connect(mapStateToProps, {
   unfollowUserThunk: unfollowUserThunkCreator,
   setCurrentPage: setCurrentPageActionCreator,
   getUsersThunk: getUsersThunkCreator,
+  addDialog: addDialogActionCreator,
 })(withAuthRedirectUsers);

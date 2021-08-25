@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 import DialogsContainer from '../../containers/DialogsContainer';
 import UsersContainer from '../../containers/UsersContainer';
 import ProfileContainer from '../../containers/ProfileContainer';
-import Login from '../Login/Login';
+import LoginContainer from '../../containers/LoginContainer';
 import './Content.css';
 
 function Content() {
@@ -19,7 +19,7 @@ function Content() {
         <UsersContainer />
       </Route>
       <Route path="/login">
-        <Login />
+        <LoginContainer />
       </Route>
     </main>
   );

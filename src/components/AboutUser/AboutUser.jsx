@@ -8,14 +8,14 @@ function AboutUser({ profileUserData, userStatus, updateUserStatus }) {
       <div className="about-user__avatar">
         <img
           className="about-user__img"
-          src={profileUserData.photos.large === null || profileUserData.photos === ''
+          src={profileUserData.photos.large === null
             ? 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
             : profileUserData.photos.large}
           alt="фото"
         />
       </div>
       <div className="about-user__desc-wrap">
-        <span className="about-user__desc about-user__desc_type_name">Han Solo</span>
+        <span className="about-user__desc about-user__desc_type_name">{profileUserData.fullName}</span>
         <span className="about-user__desc">Frontend-разработчик</span>
       </div>
       <ProfileStatus userStatus={userStatus} updateStatus={updateUserStatus} />
