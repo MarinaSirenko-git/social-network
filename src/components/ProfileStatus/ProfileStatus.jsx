@@ -40,6 +40,8 @@ class ProfileStatus extends React.Component {
   // }
 
   render() {
+    console.log(this.status);
+    console.log(this.props.userStatus);
     const { TextArea } = Input;
     return (
       <div className="status-input">

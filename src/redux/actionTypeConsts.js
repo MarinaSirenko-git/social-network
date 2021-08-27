@@ -14,5 +14,5 @@ export const IS_FETCHING = 'IS-FETCHING';
 export const SET_USER_STATUS = 'SET-USER-STATUS';
 export const ADD_DIALOG = 'ADD-DIALOG';
 export const ADD_DIALOGS = 'ADD-DIALOGS';
-export const LOGIN = 'LOGIN';
-export const LOGOUT = 'LOGOUT';
+export const LOGIN = 'auth/social-network.samuraijs.com/LOGIN';
+export const LOGOUT = 'auth/social-network.samuraijs.com/LOGOUT';

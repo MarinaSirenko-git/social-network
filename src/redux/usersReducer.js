@@ -9,6 +9,7 @@ import {
 } from './actionTypeConsts';
 
 import { usersApi } from '../utils/api';
+import { changeObjectInArray } from '../utils/utils';
 
 const initialState = {
   users: [],
@@ -24,22 +25,12 @@ export const usersReducer = (state = initialState, action) => {
     case FOLLOW:
       return {
         ...state,
-        users: state.users.map((u) => {
-          if (u.id === action.userId) {
-            return { ...u, isFollow: true };
-          }
-          return u;
-        }),
+        users: changeObjectInArray(state.users, action.userId, 'id', { isFollow: true }),
       };
     case UNFOLLOW:
       return {
         ...state,
-        users: state.users.map((u) => {
-          if (u.id === action.userId) {
-            return { ...u, isFollow: false };
-          }
-          return u;
-        }),
+        users: changeObjectInArray(state.users, action.userId, 'id', { isFollow: false }),
       };
     case USERS_QUERY:
       return {
@@ -124,26 +115,28 @@ export const getUsersThunkCreator = (currentPage, pageSize) => (dispatch) => {
     });
 };
 
-export const followUserThunkCreator = (userId) => (dispatch) => {
-  dispatch(setIsFetchingActionCreator(true, userId));
-  usersApi.followUserQuery(userId)
+export const followUnfollowFlow = (dispatch, userId, fetchingAC, apiMethod, followAC) => {
+  dispatch(fetchingAC(true, userId));
+  apiMethod(userId)
     .then((data) => {
       if (data.resultCode === 0) {
-        dispatch(followActionCreator(userId));
+        dispatch(followAC(userId));
       }
     })
     .catch((e) => console.log(e))
-    .finally(() => dispatch(setIsFetchingActionCreator(false, userId)));
+    .finally(() => dispatch(fetchingAC(false, userId)));
+};
+
+export const followUserThunkCreator = (userId) => (dispatch) => {
+  const apiMethod = usersApi.followUserQuery;
+  const followAC = followActionCreator;
+  const fetchingAC = setIsFetchingActionCreator;
+  followUnfollowFlow(dispatch, userId, fetchingAC, apiMethod, followAC);
 };
 
 export const unfollowUserThunkCreator = (userId) => (dispatch) => {
-  dispatch(setIsFetchingActionCreator(true, userId));
-  usersApi.unfollowUserQuery(userId)
-    .then((data) => {
-      if (data.resultCode === 0) {
-        dispatch(unfollowActionCreator(userId));
-      }
-    })
-    .catch((e) => console.log(e))
-    .finally(() => dispatch(setIsFetchingActionCreator(false, userId)));
+  const apiMethod = usersApi.unfollowUserQuery;
+  const followAC = unfollowActionCreator;
+  const fetchingAC = setIsFetchingActionCreator;
+  followUnfollowFlow(dispatch, userId, fetchingAC, apiMethod, followAC);
 };

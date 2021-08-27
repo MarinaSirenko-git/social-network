@@ -2,13 +2,14 @@ import {
   CHANGE_POST_TEXT, ADD_POST, SET_USER_PROFILE, SET_USER_STATUS,
 } from './actionTypeConsts';
 import { profileApi } from '../utils/api';
+import { photoPlug, mockPostText } from '../utils/consts';
 
 const initialState = {
   posts: [
     {
       id: Math.random(),
-      userPhotoPath: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-      text: 'Make your mama sad type Make your girlfriend mad tight Might seduce your dad type I am the bad guy, duh I am the bad guy, duh',
+      userPhotoPath: photoPlug,
+      text: mockPostText,
     },
   ],
   newPostText: '',
@@ -21,7 +22,7 @@ const initialState = {
 export const profileReducer = (state = initialState, action) => {
   const newPost = {
     id: Math.random(),
-    userPhotoPath: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+    userPhotoPath: photoPlug,
     text: state.newPostText,
   };
   switch (action.type) {

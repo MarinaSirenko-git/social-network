@@ -2,10 +2,11 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import Dialogs from '../components/Dialogs/Dialogs';
 import AuthRedirect from '../hoc/AuthRedirect';
+import { getDialogsElementsSelector } from '../redux/dialogsSelector';
 import { addDialogsThunkCreator } from '../redux/dialogsReducer';
 
 const mapStateToProps = (state) => ({
-  dialogsElements: state.chatPage.dialogs,
+  dialogsElements: getDialogsElementsSelector(state),
   messagesElements: state.chatPage.messages,
   isAuth: state.auth.isAuth,
 });

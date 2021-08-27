@@ -2,6 +2,7 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
+    jest: true,
   },
   extends: [
     'plugin:react/recommended',
@@ -25,6 +26,5 @@ module.exports = {
     'no-console': 0,
     'react/destructuring-assignment': 0,
     'react/prop-types': 0,
-    'eslint arrow-body-style': 0,
   },
 };

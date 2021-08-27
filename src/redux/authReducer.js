@@ -47,14 +47,11 @@ export const setIsAuthFalseActionCreator = () => ({
   type: LOGOUT,
 });
 
-export const tokenCheckThunkCreator = () => (dispatch) => {
-  authApi.tokenCheck()
-    .then((data) => {
-      if (data.resultCode === 0) {
-        dispatch(setAuthDataActionCreator(data.data));
-      }
-    })
-    .catch((e) => console.log(e));
+export const tokenCheckThunkCreator = () => async (dispatch) => {
+  const res = await authApi.tokenCheck();
+  if (res.resultCode === 0) {
+    dispatch(setAuthDataActionCreator(res.data));
+  }
 };
 
 export const loginThunkCreator = (email, password, isRememberMe) => (dispatch) => {
