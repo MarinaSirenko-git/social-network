@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Route } from 'react-router-dom';
-import DialogsContainer from '../../containers/DialogsContainer';
 import UsersContainer from '../../containers/UsersContainer';
 import ProfileContainer from '../../containers/ProfileContainer';
 import LoginContainer from '../../containers/LoginContainer';
 import './Content.css';
+
+const DialogsContainer = React.lazy(() => import('../../containers/DialogsContainer'));
 
 function Content() {
   return (
@@ -13,7 +14,9 @@ function Content() {
         <ProfileContainer />
       </Route>
       <Route path="/dialogs">
-        <DialogsContainer />
+        <Suspense fallback={<div>Загрузка...</div>}>
+          <DialogsContainer />
+        </Suspense>
       </Route>
       <Route path="/users">
         <UsersContainer />
