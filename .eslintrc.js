@@ -7,6 +7,8 @@ module.exports = {
   extends: [
     'plugin:react/recommended',
     'airbnb',
+    'airbnb-typescript',
+    'plugin:@typescript-eslint/recommended',
   ],
   parserOptions: {
     ecmaFeatures: {
@@ -14,6 +16,7 @@ module.exports = {
     },
     ecmaVersion: 12,
     sourceType: 'module',
+    project: './tsconfig.eslint.json',
   },
   plugins: [
     'react',
@@ -26,5 +29,8 @@ module.exports = {
     'no-console': 0,
     'react/destructuring-assignment': 0,
     'react/prop-types': 0,
+    'max-len': 'off',
+    'import/no-cycle': [2, { ignoreExternal: false }],
+    '@typescript-eslint/ban-ts-ignore': 'off',
   },
 };

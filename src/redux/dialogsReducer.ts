@@ -1,7 +1,7 @@
 import {
   CHANGE_USER_MESSAGE_TEXT, ADD_MESSAGE, ADD_DIALOG, ADD_DIALOGS,
 } from './actionTypeConsts';
-import { profileApi } from '../utils/api';
+import { usersApi } from '../utils/api';
 
 const initialState = {
   dialogs: [
@@ -38,9 +38,11 @@ const initialState = {
   userMessageBody: '',
 };
 
+type InitialStateType = typeof initialState;
+
 // Если в dialogsReducer не будет передано значение state,
 // то state по умолчанию будет равен initialState.
-export const dialogsReducer = (state = initialState, action) => {
+export const dialogsReducer = (state = initialState, action: any): InitialStateType => {
   const newMessage = {
     id: Math.random(),
     time: '22:00',
@@ -65,7 +67,7 @@ export const dialogsReducer = (state = initialState, action) => {
         ...state,
         dialogs: [...state.dialogs, {
           id: action.id,
-          name: action.dialogName,
+          name: action.name,
           status: 'online',
           photoPath: action.photoPath,
         }],
@@ -84,31 +86,55 @@ export const dialogsReducer = (state = initialState, action) => {
 // обернуты в стрелочные ф-ии,
 // чтобы наш компонент как можно меньше знал о логике работы с данными,
 // и лишь вызывал отдельные ф-ии по необходимости
-export const changeMessageActionCreator = (text) => ({
+
+type ChangeMessageACType = {
+  type: typeof CHANGE_USER_MESSAGE_TEXT,
+  message: string
+};
+
+export const changeMessageActionCreator = (text: string): ChangeMessageACType => ({
   type: CHANGE_USER_MESSAGE_TEXT,
   message: text,
 });
 
-export const addMessageActionCreator = () => ({
+type AddMessageACType = {
+  type: typeof ADD_MESSAGE
+};
+
+export const addMessageActionCreator = (): AddMessageACType => ({
   type: ADD_MESSAGE,
 });
 
-export const addDialogActionCreator = (id, dialogName, photoPath) => ({
-  type: ADD_DIALOG,
-  id,
-  dialogName,
-  photoPath,
-});
+type DialogType = {
+  type: typeof ADD_DIALOG,
+  id: number,
+  name: string,
+  photoPath: string,
+};
 
-export const addDialogsActionCreator = (frends) => ({
+export const addDialogActionCreator = (id: number, name: string, photoPath: string): DialogType => (
+  {
+    type: ADD_DIALOG,
+    id,
+    name,
+    photoPath,
+  }
+);
+
+type AddDialogsACType = {
+  type: typeof ADD_DIALOGS,
+  frends: any
+};
+
+export const addDialogsActionCreator = (frends: any): AddDialogsACType => ({
   type: ADD_DIALOGS,
   frends,
 });
 
-export const addDialogsThunkCreator = () => (dispatch) => {
-  profileApi.addFriends()
-    .then((data) => {
+export const addDialogsThunkCreator = () => (dispatch: any) => {
+  usersApi.getFriends()
+    .then((data: any) => {
       if (data.resultCode === 0) dispatch(addDialogsActionCreator(data.items));
     })
-    .catch((e) => console.log(e));
+    .catch((e: string) => console.log(e));
 };

@@ -2,9 +2,9 @@ import { SET_USER_DATA, LOGIN, LOGOUT } from './actionTypeConsts';
 import { authApi } from '../utils/api';
 
 interface InitialStateType {
-  id: null|number,
-  email: null|string,
-  login: null|string,
+  id: null | number,
+  email: null | string,
+  login: null | string,
   isAuth: boolean,
 }
 
@@ -42,31 +42,31 @@ export const authReducer = (state = initialState, action: any): InitialStateType
 };
 
 type DataType = {
-  id: null|string,
-  email: null|string,
-  login: null|string,
-}
+  id: null | string,
+  email: null | string,
+  login: null | string,
+};
 
 type SetAuthDataACType = {
   type: typeof SET_USER_DATA,
   data: DataType,
-}
+};
 
-export const setAuthDataActionCreator = ({ id, email, login }: any): SetAuthDataACType  => ({
+export const setAuthDataActionCreator = ({ id, email, login }: any): SetAuthDataACType => ({
   type: SET_USER_DATA,
   data: { id, email, login },
 });
 
 type SetIsAuthTrueACType = {
   type: typeof LOGIN,
-}
+};
 export const setIsAuthTrueActionCreator = (): SetIsAuthTrueACType => ({
   type: LOGIN,
 });
 
 type SetIsAuthFalseACType = {
   type: typeof LOGOUT,
-}
+};
 export const setIsAuthFalseActionCreator = (): SetIsAuthFalseACType => ({
   type: LOGOUT,
 });
@@ -78,14 +78,15 @@ export const tokenCheckThunkCreator = () => async (dispatch: any) => {
   }
 };
 
-export const loginThunkCreator = (email: string, password: string, isRememberMe: boolean): any => (dispatch: any) => {
-  authApi.login(email, password, isRememberMe)
-    .then((data: any) => {
-      if (data.resultCode === 0) {
-        dispatch(setIsAuthTrueActionCreator);
-      }
-    });
-};
+export const loginThunkCreator = (email: string, password: string, isRememberMe: boolean): any => (
+  (dispatch: any) => {
+    authApi.login(email, password, isRememberMe)
+      .then((data: any) => {
+        if (data.resultCode === 0) {
+          dispatch(setIsAuthTrueActionCreator);
+        }
+      });
+  });
 
 export const logoutThunkCreator = () => (dispatch: any) => {
   authApi.logout()

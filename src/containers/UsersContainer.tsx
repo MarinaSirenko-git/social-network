@@ -13,9 +13,34 @@ import { addDialogActionCreator } from '../redux/dialogsReducer';
 import Users from '../components/Users/Users';
 import Preloader from '../components/Preloader/Preloader';
 import AuthRedirect from '../hoc/AuthRedirect';
+import { RootReducerStateType } from '../redux/reduxStore';
 
-class UsersContainer extends React.Component {
-  constructor(props) {
+type MapStatePropsType = {
+  totalUsersCount: number,
+  pageSize: number,
+  currentPage: number,
+  users: any,
+  isFetching: any,
+  isLoading: boolean,
+  isAuth: boolean,
+};
+
+type MapDispatchPropsType = {
+  getUsersThunk: (currentPage: number, pageSize: number) => void,
+  setCurrentPage: (pageNumber: number) => void,
+  unfollowUserThunk: any,
+  followUserThunk: any,
+  addDialog: any,
+};
+
+type Props = MapStatePropsType & MapDispatchPropsType;
+
+type State = {
+  onPageChanged: (pageNumber: number) => void,
+};
+
+class UsersContainer extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.onPageChanged = this.onPageChanged.bind(this);
   }
@@ -24,9 +49,9 @@ class UsersContainer extends React.Component {
     this.props.getUsersThunk(this.props.currentPage, this.props.pageSize);
   }
 
-  onPageChanged(pageNumber) {
+  onPageChanged(pageNumber: number) {
     this.props.setCurrentPage(pageNumber);
-    this.props.getUsersThunk(pageNumber, this.pageSize);
+    this.props.getUsersThunk(pageNumber, this.props.pageSize);
   }
 
   render() {
@@ -36,7 +61,6 @@ class UsersContainer extends React.Component {
           : (
             <Users
               totalUsersCount={this.props.totalUsersCount}
-              pageSize={this.props.pageSize}
               currentPage={this.props.currentPage}
               onPageChanged={this.onPageChanged}
               users={this.props.users}
@@ -51,7 +75,7 @@ class UsersContainer extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootReducerStateType): MapStatePropsType => ({
   users: getUsers(state),
   pageSize: getPageSize(state),
   totalUsersCount: getTotalUsersCount(state),
